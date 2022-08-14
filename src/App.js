@@ -1,10 +1,19 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import About from './pages/About';
+import Home from './pages/Home';
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello !</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        {/* path="*" retourne a Home si l'url n'existe pas */}
+        <Route path="*" element={<Home />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 };
 
