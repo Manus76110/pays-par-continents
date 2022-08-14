@@ -33,6 +33,7 @@ const Countries = () => {
                             type="radio"
                             id={continent}
                             name='continentRadio'
+                            checked={continent === selectedRadio}
                             onChange={(evt) => setSelectedRadio(evt.target.id)} />
 
                         <label htmlFor={continent}>{continent}</label>
@@ -40,6 +41,10 @@ const Countries = () => {
                 ))}
 
             </ul>
+
+            {/* boutton pour annuler la recherche si un continent est séléctionné et revenir a l'etat initial */}
+            {selectedRadio && <button onClick={() => setSelectedRadio ("") }>Annuler la recherche</button>}
+
             <ul>
                 {data
                     // .filter classe les pays par continent
