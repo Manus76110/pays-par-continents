@@ -6,6 +6,7 @@ import Card from './Card';
 const Countries = () => {
     const [data, setData] = useState([])
     const [rangeValue, setRangeValue] = useState(36);
+    const [selectedRadio, setSelectedRadio] = useState("")
     const radios = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
     // Le useEffect se joue lorque le composant est monté
@@ -28,7 +29,12 @@ const Countries = () => {
                 />
                 {radios.map((continent) => (
                     <li>
-                        <input type="radio" id={continent} name='continentRadio' />
+                        <input
+                            type="radio"
+                            id={continent}
+                            name='continentRadio'
+                            onChange={(evt) => setSelectedRadio(evt.target.id)} />
+
                         <label htmlFor={continent}>{continent}</label>
                     </li>
                 ))}
@@ -36,6 +42,10 @@ const Countries = () => {
             </ul>
             <ul>
                 {data
+                    // .filter classe les pays par continent
+                    .filter((country) => country.continents[0].includes(selectedRadio))
+                    // .sort classe les pays du plus pleuplés au moins peuplés
+                    .sort((a, b) => b.population - a.population)
                     // .slice correspond au nombre de drapeaux voulu
                     .slice(0, rangeValue)
                     .map((country, index) => (
